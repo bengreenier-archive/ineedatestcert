@@ -1,0 +1,39 @@
+{
+  "name": "ineedatestcert",
+  "version": "0.0.0",
+  "description": "cli for generating certificates",
+  "main": "lib/cert.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "bin": {
+      "ineedatestcert": "index.js",
+      "inatc": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bengreenier/ineedatestcert.git"
+  },
+  "keywords": [
+    "test",
+    "certificate",
+    "generator"
+  ],
+  "author": "Ben Greenier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bengreenier/ineedatestcert/issues"
+  },
+  "homepage": "https://github.com/bengreenier/ineedatestcert#readme",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "merge": "^1.2.0",
+    "node-forge": "^0.6.39",
+    "uuid": "^2.0.1",
+    "yargs": "^4.1.0"
+  },
+  "devDependencies": {
+    "expect": "^1.14.0",
+    "mocha": "^2.4.5"
+  }
+}
