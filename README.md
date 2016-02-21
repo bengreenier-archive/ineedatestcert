@@ -1,6 +1,8 @@
 ineedatestcert
 ==============
 
+[![Build Status](https://travis-ci.org/bengreenier/ineedatestcert.svg?branch=master)](https://travis-ci.org/bengreenier/ineedatestcert)
+
 cli for generating certificates
 
 # How
