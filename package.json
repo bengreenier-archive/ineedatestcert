@@ -1,6 +1,6 @@
 {
   "name": "ineedatestcert",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "cli for generating certificates",
   "main": "lib/cert.js",
   "scripts": {
