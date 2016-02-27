@@ -9,7 +9,7 @@ cli for generating certificates
 
 First, `npm install -g ineedatestcert` then:
 
-> Note: the examples below use `inatc` as the command name, but you can also
+> Note: The examples below use `inatc` as the command name, but you can also
 fully spell it out, if you wish (ie: `ineedatestcert`)
 
 ```
@@ -45,7 +45,8 @@ var myCert = new TestCert({
         name: "<uuid>.innedatestcert.com",
         org: "Test Cert",
         b: 2048
-    }).crunch(function (self) {
+    }).crunch(function (err, self) {
+        //assert.equal(err, null);
         //assert.equal(self, myCert);
         var raw = myCert.getRaw();
         var publicRaw = myCert.getRawPublicOnly();
@@ -55,21 +56,22 @@ var myCert = new TestCert({
 
 ## Constructor
 
-> Note: the constructor is lightweight - the certificate creation calculations
+> Note: The constructor is lightweight - the certificate creation calculations
 occur in `crunch()`
 
 exposed by `require('ineedatestcert')` - used to create test cert instances.
 
 ## Crunch
 
-> Note: crunch takes a callback that gets passed an instance of the test cert
-and is called once all the calculations complete (and the cert is therefore made).
+> Note: crunch optionally takes a callback that gets passed any error instance,
+and the instance of the test cert. It is called once all the calculations complete
+(and the cert is therefore made). If it isn't passed, a promise is returned.
 
 member function - used to actually do the maths to create the test cert data.
 
 ## GetRaw
 
-> Note: when called with a `pem` cert, this is a string. When called with `pkcs`
+> Note: When called with a `pem` cert, this is a string. When called with `pkcs`
 this is a string of binary data. When writing `pkcs` to disk you should specify
 `encoding: "binary"`
 
@@ -77,7 +79,7 @@ member function - returns the raw data of the test cert.
 
 ## GetRawPublicOnly
 
-> Note: this is a `pem` style string.
+> Note: This is a `pem` style string.
 
 member function - returns the raw data of the public bits of the test cert.
 
