@@ -52,11 +52,19 @@ if (config.c.indexOf("<uuid>") === 0) {
     delete config.name; // fix the alias too
 }
 
+// if using -p <password> and -t <pem> warn
+if (config.p && config.t === "pem") {
+    console.warn("[WARN] using -p and -t pem together isn't possible. you probably mean -t pkcs");
+}
+
 debug("using configuration: "+JSON.stringify(config));
 
 var cert = new Cert(config);
 
-cert.crunch(function calculated() {
+cert.crunch(function calculated(err) {
+    if (err) {
+        return console.error(err);
+    }
     if (config.a) {
         fs.writeFileSync(config.a, cert.getRawPublicOnly());
         if (config.o) {
