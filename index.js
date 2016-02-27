@@ -54,7 +54,7 @@ if (config.c.indexOf("<uuid>") === 0) {
 
 // if using -p <password> and -t <pem> warn
 if (config.p && config.t === "pem") {
-    console.warn("[WARN] using -p and -t pem together isn't possible. you probably mean -t pkcs");
+    console.warn("[WARN] using -p and -t pem together isn't possible. you probably mean -t pkcs\n");
 }
 
 debug("using configuration: "+JSON.stringify(config));
