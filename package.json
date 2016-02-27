@@ -1,14 +1,14 @@
 {
   "name": "ineedatestcert",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "cli for generating certificates",
   "main": "lib/cert.js",
   "scripts": {
     "test": "mocha"
   },
   "bin": {
-      "ineedatestcert": "index.js",
-      "inatc": "index.js"
+    "ineedatestcert": "index.js",
+    "inatc": "index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "debug": "^2.2.0",
     "merge": "^1.2.0",
     "node-forge": "^0.6.39",
+    "promise": "^7.1.1",
     "uuid": "^2.0.1",
     "yargs": "^4.1.0"
   },
