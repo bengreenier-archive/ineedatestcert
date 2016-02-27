@@ -76,7 +76,7 @@ describe("ineedatestcert.cert", function () {
         });
     });
     
-    it("should expose pem", function (done) {
+    it("should expose unencrypted pem", function (done) {
         this.timeout(1000*60);
         new Cert({
             b: 1024, // we use a smaller key size for tests
@@ -87,6 +87,24 @@ describe("ineedatestcert.cert", function () {
             var pemText = cert.getRaw();
             expect(pemText).toMatch(/BEGIN RSA PRIVATE KEY/);
             expect(pemText).toMatch(/END RSA PRIVATE KEY/);
+            expect(pemText).toMatch(/BEGIN CERTIFICATE/);
+            expect(pemText).toMatch(/END CERTIFICATE/);
+            done();
+        });
+    });
+    
+    it("should expose encrypted pem", function (done) {
+        this.timeout(1000*60);
+        new Cert({
+            b: 1024, // we use a smaller key size for tests
+            type: "pem",
+            password: "password"
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
+            var pemText = cert.getRaw();
+            expect(pemText).toMatch(/BEGIN ENCRYPTED PRIVATE KEY/);
+            expect(pemText).toMatch(/END ENCRYPTED PRIVATE KEY/);
             expect(pemText).toMatch(/BEGIN CERTIFICATE/);
             expect(pemText).toMatch(/END CERTIFICATE/);
             done();
@@ -118,6 +136,7 @@ describe("ineedatestcert.cert", function () {
             expect(err).toNotExist();
             
             var pemText = cert.getRawPublicOnly();
+            expect(pemText).toNotMatch(/PRIVATE KEY/);
             expect(pemText).toMatch(/BEGIN CERTIFICATE/);
             expect(pemText).toMatch(/END CERTIFICATE/);
             done();
