@@ -50,7 +50,19 @@ describe("ineedatestcert.cert", function () {
         var cert = new Cert({
             b: 1024 // we use a smaller key size for tests
         });
-        cert.crunch(function (self) {
+        cert.crunch(function (err, self) {
+            expect(err).toNotExist();
+            expect(self).toBe(cert);
+            done();
+        });
+    });
+    
+    it("should pass itself to crunch promise", function (done) {
+        this.timeout(1000*60);
+        var cert = new Cert({
+            b: 1024 // we use a smaller key size for tests
+        });
+        cert.crunch().then(function (self) {
             expect(self).toBe(cert);
             done();
         });
@@ -58,7 +70,8 @@ describe("ineedatestcert.cert", function () {
     
     it("should crunch successfully, given 2 minute timeout", function (done){
         this.timeout(1000*60*2);
-        new Cert({}).crunch(function () {
+        new Cert({}).crunch(function (err) {
+            expect(err).toNotExist();
             done();
         });
     });
@@ -68,7 +81,9 @@ describe("ineedatestcert.cert", function () {
         new Cert({
             b: 1024, // we use a smaller key size for tests
             type: "pem"
-        }).crunch(function (cert) {
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
             var pemText = cert.getRaw();
             expect(pemText).toMatch(/BEGIN RSA PRIVATE KEY/);
             expect(pemText).toMatch(/END RSA PRIVATE KEY/);
@@ -83,7 +98,9 @@ describe("ineedatestcert.cert", function () {
         new Cert({
             b: 1024, // we use a smaller key size for tests
             type: "pkcs"
-        }).crunch(function (cert) {
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
             var pkcsBinary = cert.getRaw();
             // TODO: write a good isBinary() test
             expect(pkcsBinary).toExist();
@@ -97,7 +114,9 @@ describe("ineedatestcert.cert", function () {
         new Cert({
             b: 1024, // we use a smaller key size for tests
             type: "pem"
-        }).crunch(function (cert) {
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
             var pemText = cert.getRawPublicOnly();
             expect(pemText).toMatch(/BEGIN CERTIFICATE/);
             expect(pemText).toMatch(/END CERTIFICATE/);
@@ -110,7 +129,9 @@ describe("ineedatestcert.cert", function () {
         new Cert({
             b: 1024, // we use a smaller key size for tests
             type: "pkcs"
-        }).crunch(function (cert) {
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
             var pemText = cert.getRawPublicOnly();
             expect(pemText).toMatch(/BEGIN CERTIFICATE/);
             expect(pemText).toMatch(/END CERTIFICATE/);
@@ -123,7 +144,9 @@ describe("ineedatestcert.cert", function () {
         new Cert({
             b: 1024, // we use a smaller key size for tests
             type: "pem"
-        }).crunch(function (cert) {
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
             var b66Text = cert.getBase64();
             expect(b64decode).withArgs(b66Text).toNotThrow();
             done();
@@ -135,7 +158,9 @@ describe("ineedatestcert.cert", function () {
         new Cert({
             b: 1024, // we use a smaller key size for tests
             type: "pkcs"
-        }).crunch(function (cert) {
+        }).crunch(function (err, cert) {
+            expect(err).toNotExist();
+            
             var b66Text = cert.getBase64();
             expect(b64decode).withArgs(b66Text).toNotThrow();
             done();
