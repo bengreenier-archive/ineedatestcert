@@ -23,6 +23,8 @@ Options:
   -t, --type      type of output - pem or pkcs                 [default: "pkcs"]
   -u, --org       organization to use                     [default: "Test Cert"]
   -a, --ca        specify file to output ca bundle to            [default: null]
+  --alt           specify alternative dns names                  [default: null]
+  --na            not after date                            [default: <now>+1yr]
 
 Made with <3 by @bengreenier
 ```

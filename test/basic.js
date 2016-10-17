@@ -9,39 +9,39 @@ var b64decode = require('node-forge').util.decode64;
 describe("ineedatestcert.cert", function () {
     it("should throw on bad args", function () {
         expect(function (opts) {
-            new Cert(opts);
-        }).withArgs({
-            type:"cat"
+            new Cert({
+                type:"cat"
+            });
         }).toThrow(/pkcs or pem/);
         
         expect(function (opts) {
-            new Cert(opts);
-        }).withArgs({
-            type:1
+            new Cert({
+                type:1
+            });
         }).toThrow(/pkcs or pem/);
         
         expect(function (opts) {
-            new Cert(opts);
-        }).withArgs({
-            b:"cat"
+            new Cert({
+                b:"cat"
+            });
         }).toThrow(/b/);
         
         expect(function (opts) {
-            new Cert(opts);
-        }).withArgs({
-            name:1
+            new Cert({
+                name:1
+            });
         }).toThrow(/name/);
         
         expect(function (opts) {
-            new Cert(opts);
-        }).withArgs({
-            org:1
+            new Cert({
+                org:1
+            });
         }).toThrow(/org/);
         
         expect(function (opts) {
-            new Cert(opts);
-        }).withArgs({
-            password:1
+            new Cert({
+                password:1
+            });
         }).toThrow(/password/);
     });
     
@@ -167,7 +167,9 @@ describe("ineedatestcert.cert", function () {
             expect(err).toNotExist();
             
             var b66Text = cert.getBase64();
-            expect(b64decode).withArgs(b66Text).toNotThrow();
+            expect(function () {
+                b64decode(b66Text);
+            }).toNotThrow();
             done();
         });
     });
@@ -181,7 +183,9 @@ describe("ineedatestcert.cert", function () {
             expect(err).toNotExist();
             
             var b66Text = cert.getBase64();
-            expect(b64decode).withArgs(b66Text).toNotThrow();
+            expect(function () {
+                b64decode(b66Text);
+            }).toNotThrow();
             done();
         });
     });
