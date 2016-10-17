@@ -1,6 +1,6 @@
 {
   "name": "ineedatestcert",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "cli for generating certificates",
   "main": "lib/cert.js",
   "scripts": {
@@ -28,6 +28,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "merge": "^1.2.0",
+    "moment": "^2.15.1",
     "node-forge": "^0.6.39",
     "promise": "^7.1.1",
     "uuid": "^2.0.1",

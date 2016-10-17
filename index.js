@@ -3,6 +3,7 @@
 var Cert = require('./lib/cert');
 var fs = require('fs');
 var yargs = require('yargs');
+var moment = require('moment');
 var debug = require('debug')('ineedatestcert.cli');
 
 /**
@@ -28,7 +29,11 @@ var config = yargs
     .alias('u', 'org')
     .describe('a', 'specify file to output ca bundle to')
     .alias('a', 'ca')
+    .describe('alt', 'specify alternative dns names')
+    .describe('na', 'not after date')
     .default({
+        na: moment().add(1, 'year').toISOString(),
+        alt: [],
         a: null, // filpath to write ca bundle to - if null, not written
         b: 2048, // any more get's real slow
         c: "<uuid>.ineedatestcert.com", // generate a unique subdomain
